@@ -64,7 +64,23 @@ assert len(historial) == 3
 # TODO: agregue un assert por cada uno de los textos T1..T6 de la traza E.2
 # TODO: agregue los cuatro recortes de la traza E.1 (max_mensajes = 4)
 
-# --- Aqui van las tres funciones puras del bot (seccion 12.3, Parte H) ---
-# TODO: leer_permitidos, partir_mensaje y usuario_anonimo
+# --- Las tres funciones puras del bot (seccion 12.3) ---
+from app.bot import leer_permitidos, partir_mensaje, usuario_anonimo
+
+assert leer_permitidos("123,456") == {123, 456}
+assert leer_permitidos(" 123 , 456 ") == {123, 456}
+assert leer_permitidos("") == set()
+assert leer_permitidos("abc,123") == {123}
+assert partir_mensaje("hola") == ["hola"]
+assert partir_mensaje("a" * 4096) == ["a" * 4096]
+assert partir_mensaje("abcdef", limite=2) == ["ab", "cd", "ef"]
+assert partir_mensaje("ab\ncdef", limite=4) == ["ab", "cdef"]
+largo = "renglon de prueba\n" * 500
+trozos = partir_mensaje(largo)
+assert all(len(t) <= 4096 for t in trozos)
+assert "\n".join(trozos) == largo
+assert len(usuario_anonimo(123456789)) == 10
+assert usuario_anonimo(123456789) == usuario_anonimo("123456789")
+assert not usuario_anonimo(123456789).isdigit()
 
 print("OK")
