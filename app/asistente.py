@@ -123,3 +123,16 @@ class Asistente:
             evento.update(extra)
         self._anotar(evento)
         return {"texto": mostrado, "evento": evento, "validacion": validacion}
+    
+
+def construir_asistente(simulado, **opciones):
+    """Arma el asistente con el modelo falso o con el real.
+
+    La usan cli.py, lote.py y bot.py para no repetir la misma decisión.
+    """
+    if simulado:
+        from app.modelo_simulado import ModeloSimulado
+        return Asistente(ModeloSimulado(), modo="simulado", **opciones)
+    # Se importa aquí y no arriba para que --simulado no necesite la clave.
+    from app.modelo import llamar_modelo
+    return Asistente(llamar_modelo, modo="real", **opciones)

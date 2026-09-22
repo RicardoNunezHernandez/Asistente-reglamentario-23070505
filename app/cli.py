@@ -8,8 +8,7 @@ import sys
 
 from dotenv import load_dotenv
 
-from app.asistente import Asistente
-from app.modelo_simulado import ModeloSimulado
+from app.asistente import construir_asistente
 
 AVISO = (
     "Asistente del Reglamento de Estudiantes del TecNM.\n"
@@ -25,13 +24,7 @@ PROBLEMA = (
 )
 
 
-def construir_asistente(simulado):
-    """Arma el asistente con el modelo falso o con el real."""
-    if simulado:
-        return Asistente(ModeloSimulado(), modo="simulado")
-    # Se importa aquí y no arriba para que --simulado no necesite la clave.
-    from app.modelo import llamar_modelo
-    return Asistente(llamar_modelo, modo="real")
+
 
 
 def main(argumentos):
