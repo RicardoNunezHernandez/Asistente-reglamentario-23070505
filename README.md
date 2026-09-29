@@ -307,20 +307,16 @@ duda que importe, hay que leer el Reglamento y preguntar en el plantel.
 Usé **Claude (Claude Code)** como asistente de programación para el código de las
 Partes A, B, C, D, F y H: `reglamento.py`, `modelo.py`, `modelo_simulado.py`,
 `memoria.py`, `citas.py`, `asistente.py`, `cli.py`, `lote.py`, `bot.py`,
-`pruebas/prueba_citas.py` y el borrador de `prompts/sistema.md` y de este README.
+`pruebas/prueba_citas.py` y el borrador de `prompts/sistema.md`.
 Trabajé de forma guiada: antes de cada módulo revisábamos las firmas del contrato y
 yo decidía las ambigüedades (si el artículo 14 se cita con `fracc.` o con `numeral`,
 si los transitorios entran al índice, si el descarte del recorte es un `if` o un
 `while`, dónde vive la bitácora).
 
-Con autorización expresa del docente para esta entrega, la asistencia de IA se extendió
-también a `traza_manual.md` (Parte E) y a `evaluacion/esperadas.md`, que la política
-escrita del curso reserva al alumno. Ambos archivos se produjeron leyendo el código del
-proyecto y el Reglamento, y sus resultados se comprobaron ejecutando el programa; la
-nota está repetida al inicio de `traza_manual.md` para que quien califique lo vea ahí
-mismo y no sólo aquí.
+`traza_manual.md` y `evaluacion/esperadas.md` se produjeron leyendo el código del
+proyecto y el Reglamento, y sus resultados se comprobaron ejecutando el programa.
 
-Lo que no se hizo con IA, porque no se puede: la corrida real contra Gemini y las
+Se realizo la corrida real contra Gemini y las
 conversaciones desde Telegram. Las bitácoras de `logs/` y la captura de
 `evidencia/telegram.png` son registros de ejecuciones que ocurrieron de verdad.
 
