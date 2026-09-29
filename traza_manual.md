@@ -121,14 +121,44 @@ del hueco.
 
 | Turno | Mensajes enviados | Tokens de entrada | Tokens de salida |
 |---|---|---|---|
-| C1-1 | (escriba aquí) | | |
-| C1-2 | (escriba aquí) | | |
-| C1-3 | (escriba aquí) | | |
+| C1-1 | 1 | 6526 | 94 |
+| C1-2 | 3 | 6630 | 39 |
+| C1-3 | 5 | 6679 | 47 |
 
 **¿Por qué crecen los tokens de entrada? ¿Qué parte de ellos es el Reglamento?**
 
-(escriba aquí)
+Crecen porque cada turno arrastra la conversación anterior. En `C1-1` el modelo recibe
+un solo mensaje, la pregunta; en `C1-2` recibe tres —la pregunta, la respuesta y la
+nueva pregunta—; en `C1-3` recibe cinco. Lo único que cambia entre una llamada y otra
+es esa memoria: el prompt de sistema es idéntico las tres veces.
+
+El crecimiento total es de **153 tokens** (6,526 → 6,679) a lo largo de tres turnos,
+o sea unos 50 tokens por turno. Es poquísimo comparado con el tamaño de la llamada, y
+esa desproporción es el dato interesante: **el prompt de sistema con el Reglamento
+completo son 27,204 caracteres, que al tokenizarse dan ~6,526 tokens**. Es decir que
+el Reglamento es aproximadamente el **97.7 %** de cada llamada, y toda la conversación
+—preguntas y respuestas— cabe en el 2 % restante.
+
+Dicho de otro modo: en este diseño la memoria corta prácticamente no cuesta. Lo caro
+es volver a mandar el documento entero en cada pregunta, por sencilla que sea. Ése es
+el precio de no tener búsqueda, y es justo lo que la Parte F pone en números al estimar
+qué pasaría con el Manual de Lineamientos.
 
 **¿Qué pasaría en el turno 10 de una conversación larga si `recortar` no existiera?**
 
-(escriba aquí)
+Sin `recortar`, el turno 10 enviaría el historial completo: 19 mensajes (las 10
+preguntas del usuario y las 9 respuestas anteriores del modelo), en vez de los 6 que
+permite `MAX_MENSAJES`. Tomando los tamaños medidos en esta corrida —una pregunta ronda
+los 20 tokens y una respuesta del modelo los 60— serían unos 750 tokens de conversación
+contra los ~250 del recorte: alrededor de **500 tokens extra por llamada**, y creciendo
+sin límite en cada turno siguiente.
+
+Sobre 6,526 tokens de base, 500 no parece gran cosa: un 8 % más caro. Y ahí está lo
+que esta traza enseña de verdad: **con un documento que ya ocupa el 98 % del prompt,
+recortar la memoria apenas ahorra nada.** El recorte importa por dos razones distintas:
+porque el crecimiento es ilimitado —en el turno 100 la conversación sí dominaría la
+llamada— y porque la ventana de contexto del modelo es finita, así que sin recorte una
+conversación suficientemente larga acabaría por no caber y fallaría.
+
+Pero si lo que se quisiera es abaratar esta práctica, recortar la memoria es la palanca
+equivocada. La palanca es no mandar el Reglamento completo cada vez.

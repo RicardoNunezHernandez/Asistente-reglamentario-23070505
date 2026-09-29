@@ -256,12 +256,30 @@ no detiene la corrida: se registra y se sigue con la siguiente pregunta.
 
 ## Resultados
 
-COMPLETAR: cinco renglones con los números de `evaluacion/resultados.md`:
+De los 18 turnos del banco de pruebas, **16 salieron correctos y 2 parciales; ninguno
+incorrecto**. Las dos parciales (R12 y C1-3) citaron un fundamento cierto pero
+incompleto, sin inventar nada.
 
-- respuestas correctas;
-- citas inválidas;
-- tokens por llamada;
-- la estimación para el Manual de Lineamientos.
+**Cero citas inválidas en los 18 turnos**: el modelo no escribió ni un artículo ni una
+fracción que no existiera, así que el aviso de `validar_citas` nunca tuvo que
+dispararse. Que el mecanismo sirve se comprueba con el modelo simulado, cuyo guion
+incluye un `Art. 31, fracc. II` falso que sí queda marcado.
+
+Cada llamada costó **6,556 tokens de entrada en promedio** (118,016 en total, más 1,105
+de salida). El 97.7 % de ese gasto es el Reglamento viajando dentro del prompt; la
+memoria corta explica apenas 153 tokens de variación a lo largo de una conversación de
+tres turnos.
+
+Proporción medida: **4.169 caracteres por token**. Con ella, agregar el Manual de
+Lineamientos Académico-Administrativos (~334,000 caracteres) costaría unos **80,124
+tokens extra**, llevando cada pregunta de ~6,526 a **~86,650 tokens: 13.3 veces más
+cara**, con una pérdida previsible de precisión al quedar el artículo relevante
+enterrado entre dos documentos. La alternativa es recuperar sólo los fragmentos
+pertinentes en vez de mandarlo todo.
+
+La corrida se hizo con `gemini-3.5-flash-lite` y no con `gemini-3.5-flash`: este último
+agotó su cuota diaria de 20 peticiones devolviendo 503 UNAVAILABLE, con una sola
+respuesta útil. El detalle está documentado en `evaluacion/resultados.md`.
 
 ## Límites y ética
 
