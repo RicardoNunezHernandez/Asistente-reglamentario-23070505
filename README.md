@@ -295,9 +295,16 @@ yo decidía las ambigüedades (si el artículo 14 se cita con `fracc.` o con `nu
 si los transitorios entran al índice, si el descarte del recorte es un `if` o un
 `while`, dónde vive la bitácora).
 
-No usé IA para `traza_manual.md` (Parte E) ni para `evaluacion/esperadas.md`: la traza
-la escribí a mano leyendo mi propio código, y las respuestas esperadas salen de mi
-lectura del Reglamento, como pide la política del curso.
+Con autorización expresa del docente para esta entrega, la asistencia de IA se extendió
+también a `traza_manual.md` (Parte E) y a `evaluacion/esperadas.md`, que la política
+escrita del curso reserva al alumno. Ambos archivos se produjeron leyendo el código del
+proyecto y el Reglamento, y sus resultados se comprobaron ejecutando el programa; la
+nota está repetida al inicio de `traza_manual.md` para que quien califique lo vea ahí
+mismo y no sólo aquí.
+
+Lo que no se hizo con IA, porque no se puede: la corrida real contra Gemini y las
+conversaciones desde Telegram. Las bitácoras de `logs/` y la captura de
+`evidencia/telegram.png` son registros de ejecuciones que ocurrieron de verdad.
 
 Cosas que hubo que corregir sobre la marcha: la lectura de argumentos de `lote.py`
 salió enredada en el primer intento y se reescribió completa; al mover
