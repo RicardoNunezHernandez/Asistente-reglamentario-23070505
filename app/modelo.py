@@ -30,7 +30,7 @@ def _obtener_cliente():
             api_key=os.environ["GEMINI_API_KEY"],
             http_options=types.HttpOptions(
                 retry_options=types.HttpRetryOptions(
-                    attempts=5, initial_delay=2.0, max_delay=30.0
+                    attempts=2, initial_delay=2.0, max_delay=30.0
                 )
             ),
         )
